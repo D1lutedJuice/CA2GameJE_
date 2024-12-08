@@ -43,6 +43,14 @@ class GameObject {
       // Find the first component that is an instance of componentClass.
       return this.components.find((component) => component instanceof componentClass);
     }
+    
+    replaceComponent(componentClass, newComponent)
+    {
+        const index = this.components.findIndex(o => o instanceof componentClass);
+        if (index > -1) {
+            this.components[index] = newComponent;
+        }
+    }
   }
   
   // The GameObject class is exported as the default export of this module.
