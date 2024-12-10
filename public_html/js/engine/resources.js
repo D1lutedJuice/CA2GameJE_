@@ -9,9 +9,20 @@ const RunImages =
             new Image(), // The Image instance for the player.
             new Image(),
             new Image(),// The Image instance for the enemy.
-            new Image(),
+            new Image()
         ];
 
+const IdleImages=
+        [
+           new Image(),
+           new Image(),
+           new Image(),
+           new Image(),
+           new Image(),
+           new Image(),
+           new Image()
+        ];
+        
 // Create an AudioFiles object to hold the file paths of the audio resources.
 const AudioFiles = {
   jump: './resources/audio/jump.mp3', // The file path of the jump sound.
@@ -28,6 +39,15 @@ RunImages[1].src = "./resources/images/player/Run2.png";
 RunImages[2].src = "./resources/images/player/Run3.png";
 RunImages[3].src = "./resources/images/player/Run4.png";
 
+IdleImages[0].src = "./resources/images/player/Idle1.png";
+IdleImages[1].src = "./resources/images/player/Idle2.png";
+IdleImages[2].src = "./resources/images/player/Idle3.png";
+IdleImages[3].src = "./resources/images/player/Idle4.png";
+IdleImages[4].src = "./resources/images/player/Idle5.png";
+IdleImages[5].src = "./resources/images/player/Idle6.png";
+IdleImages[6].src = "./resources/images/player/Idle7.png";
+
+
 
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
-export { Images, AudioFiles, RunImages};
+export { Images, AudioFiles, RunImages, IdleImages};

@@ -26,28 +26,15 @@ class Collectible extends GameObject
     {
         let physics = this.getComponent(Physics);
         let renderer = this.getComponent(Renderer);
-        if(this.vDirection===1)
-        {
-            physics.velocity.y = -50;
-        }
-        else
-        {
-            physics.velocity.y = 50;
-        }
-        this.timeFloating -= deltaTime;
-        if(this.timeFloating < 0)
-        {
-            this.timeFloating = this.floatTime;
-            this.vDirection *=-1;
-            physics.velocity.y=0;
-        }
         
-        renderer.width += this.hDirection;
-        this.x += (this.hDirection/2)*-1;
-        if(renderer.width > 30 || renderer.width <1)
-        {
-            this.hDirection *=-1;
+          //objects will fall at this speed
+          physics.velocity.y = 100;
+       
+        //removes gameobject wthen it hits the ground
+        if (this.y > (this.game.canvas.height-70) - renderer.height) {
+            this.game.removeGameObject(this); 
         }
+    
         super.update(deltaTime);
     }
     

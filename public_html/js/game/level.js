@@ -4,8 +4,8 @@ import Confiner from '../engine/confiner.js';
 import Platform from './platform.js';
 import Player from './player.js';
 import Collectible from './collectible.js';
-
 import PlayerUI from './PlayerUI.js';
+
 
 class Level extends Game
 {
@@ -14,16 +14,17 @@ class Level extends Game
         super(canvasId);
         
         
-        const player = new Player(10, this.canvas.height - 100,50, 50);
+        const player = new Player(10, this.canvas.height - 50,100, 100);
+        const playerUI = new PlayerUI(10, 10); 
+        this.addGameObject(playerUI);
         
-        this.camera.confiner = new Confiner(0,0,2000,this.canvas.height);
+        this.camera.confiner = new Confiner(0,0,1200,this.canvas.height);
         this.camera.target = player;
         this.addGameObject(player);
         
         const platforms = [
-                    new Platform(0, this.canvas.height-40, 200, 20),
-                    new Platform(300, this.canvas.height-40, 200, 20),
-                    new Platform(600, this.canvas.height-80, 200, 60)
+                    new Platform(-400, this.canvas.height -70, 1600, 200)
+                   
         ];
         
         for(const platform of platforms)
@@ -32,8 +33,8 @@ class Level extends Game
         }
         
         const Collectibles = [
-            new Collectible(375,this.canvas.height-100),
-            new Collectible(475,this.canvas.height-100)
+            new Collectible(375,this.canvas.height-800),
+            new Collectible(475,this.canvas.height-800)
            
         ];
         

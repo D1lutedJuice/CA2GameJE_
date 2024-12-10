@@ -5,7 +5,12 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: skyblue; /* Red background color */
+    /* used https://www.w3schools.com/css/css_background_image.asp for help */
+     background-image: url("../resources/images/Environment/Background.png");
+     /*covers the whole body */
+     background-size: cover;
+     /*centers the image */
+     background-position: center;
 }
 
 /* Add border to the canvas element */

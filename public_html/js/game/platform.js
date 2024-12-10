@@ -4,7 +4,7 @@ import Physics from '../engine/physics.js'
 
 class Platform extends GameObject
 {
-    constructor(x, y, w, h, color="brown")
+    constructor(x, y, w, h, color="#131f26")
     {
         super(x, y);
         

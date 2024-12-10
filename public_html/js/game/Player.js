@@ -11,6 +11,8 @@ import Collectible from './collectible.js'
 import ParticleSystem from '../engine/particleSystem.js'
 
 import {RunImages} from '../engine/resources.js'
+import {IdleImages} from '../engine/resources.js'
+
 class Player extends GameObject
 {
     constructor(x, y, w, h)
@@ -22,7 +24,7 @@ class Player extends GameObject
         this.animator = new Animator('red',w,h);
         this.addComponent(this.animator);
         let run = new Animation('red',w,h, RunImages, 10);
-        let idle = new Animation('red', w, h, [RunImages[0]], 10);
+        let idle = new Animation('red', w, h, IdleImages, 10);
         
         this.animator.addAnimation("run", run);
         this.animator.addAnimation("idle", idle);
@@ -32,7 +34,7 @@ class Player extends GameObject
         this.direction = 1;
         this.score = 0;
         this.defaultSpeed=100;
-        this.speed = 100;
+        this.speed = 400;
         this.isOnPlatform = false;
         this.isJumping = false;
         this.jumpForce = 300;
@@ -122,7 +124,6 @@ class Player extends GameObject
         this.game.removeGameObject(collectible);
         this.emitParticles(collectible);
         this.score++;
-        this.speed *= 2;
        
     }
     
