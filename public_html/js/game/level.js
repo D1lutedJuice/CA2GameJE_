@@ -14,7 +14,7 @@ class Level extends Game
         super(canvasId);
         
         
-        const player = new Player(10, this.canvas.height - 50,100, 100);
+        const player = new Player(30, this.canvas.height - 50,100, 100);
         const playerUI = new PlayerUI(10, 10); 
         this.addGameObject(playerUI);
         
@@ -30,23 +30,31 @@ class Level extends Game
         for(const platform of platforms)
         {
             this.addGameObject(platform);
-        }
-        
-        const Collectibles = [
-            new Collectible(375,this.canvas.height-800),
-            new Collectible(475,this.canvas.height-800)
-           
-        ];
-        
-        for(const coll of Collectibles)
-        {
-            this.addGameObject(coll);
-        }
-        
-      
-      
-        
+        }        
     }
-}
+
+     //used this website to help with the random spawning collectable https://jsfiddle.net/m1erickson/RCLtR/
+     update(deltaTime) {
+       //this ensures that the it updates the logic for everything
+       super.update(deltaTime);
+       
+        if (Math.random() < 0.01) { // 1% chance per frame to spawn a collectible
+            this.spawnRandomCollectable();
+        }
+    }
+   spawnRandomCollectable() {
+
+     // set x randomly
+     const x= Math.random() * (this.canvas.width);
+     // set y to start at the top
+     const y= 0;
+   
+     // create the new collectable did -400 because collectables would for some reason not spawn on the left
+     const collectible = new Collectible(x-400, y);
+    
+     this.addGameObject(collectible);
+  }
+ }
+
 export default Level
 

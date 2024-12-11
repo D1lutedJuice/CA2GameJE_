@@ -6,16 +6,24 @@
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/game/collectible.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/game/platform.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/resources.js</file>
+            <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/input.js</file>
+            <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/particleSystem.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/game/player.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/Animation.js</file>
+            <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/gameobject.js</file>
+            <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/game/PlayerUI.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/component.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/graphicalUI.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/index.html</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/confiner.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/camera.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/game.js</file>
+            <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/physics.js</file>
+            <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/particle.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/start.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/resources/images/Environment/Background.png</file>
+            <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/ui.js</file>
+            <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/renderer.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/css/styles.css</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/engine/Animator.js</file>
             <file>file:/C:/xampp/htdocs/CA2GameJE_/public_html/js/game/level.js</file>
