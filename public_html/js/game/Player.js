@@ -13,6 +13,7 @@ import ParticleSystem from '../engine/particleSystem.js'
 
 import {RunImages} from '../engine/resources.js'
 import {IdleImages} from '../engine/resources.js'
+import {HurtImages} from '../engine/resources.js'
 
 class Player extends GameObject
 {
@@ -26,10 +27,14 @@ class Player extends GameObject
         this.addComponent(this.animator);
         let run = new Animation('red',w,h, RunImages, 10);
         let idle = new Animation('red', w, h, IdleImages, 10);
+        let hurt = new Animation('red', w, h, HurtImages, 10);
         
         this.animator.addAnimation("run", run);
         this.animator.addAnimation("idle", idle);
+        this.animator.addAnimation("hurt", hurt);
         this.animator.setAnimation("idle");
+        this.hurt= false;
+        this.hurtTime= 0.0;
         this.tag = "player";
         this.isOnPlatform = false;
         this.direction = 1;
@@ -53,6 +58,10 @@ class Player extends GameObject
         const physics = this.getComponent(Physics);
         const input = this.getComponent(Input);
         const renderer = this.getComponent(Renderer);
+        
+        //as long as player is not hurt
+        if (!this.hurt) {     
+    
         if(input.isKeyDown("ArrowRight"))
         {
             
@@ -82,6 +91,7 @@ class Player extends GameObject
         {
             this.updateJump(deltaTime);
         }
+    }
         const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
         for(const platform of platforms)
         {
@@ -98,6 +108,7 @@ class Player extends GameObject
             }
             
         }
+    
         
         const collectibles = this.game.gameObjects.filter
         ((obj)=> obj instanceof Collectible);
@@ -121,14 +132,22 @@ class Player extends GameObject
             if(physics.isColliding(hColl.getComponent(Physics)))
             {
                 this.collectHarmful(hColl);
-                
+             
             }
-        }
-        
-        
-        
+        } 
+    
+         //if player is hurt
+         if (this.hurt) {
+            //will start the hurt timer till it reaches 0 or below
+           this.hurtTime -= deltaTime;
+           if (this.hurtTime <= 0) {
+               //after timer player no longer hurt 
+               this.hurt = false; 
+               //this.animator.setAnimation("idle");
+             }
+}
         super.update(deltaTime);
-        
+     
         
     }
     
@@ -139,9 +158,10 @@ class Player extends GameObject
         if(this.lives === 0 || this.lives <0)
         {
             this.lives=0;
-            
         }
-       
+          this.hurt=true;
+          this.hurtTime=0.3;//timer of hurt state 
+          this.animator.setAnimation("hurt");           
     }
     
     collect(collectible)

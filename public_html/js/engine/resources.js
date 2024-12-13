@@ -1,6 +1,8 @@
 // Create an Images object to hold the Image instances for the player and the enemy.
 const Images = {
-  player: new Image() // The Image instance for the player.
+  player: new Image, // The Image instance for the player.
+  collectible: new Image(),
+  harmfulCollectible: new Image
   
 };
 
@@ -23,6 +25,16 @@ const IdleImages=
            new Image()
         ];
         
+        const HurtImages=
+        [
+           new Image(),
+           new Image(),
+           new Image(),
+           new Image()
+         
+        ];
+
+        
 // Create an AudioFiles object to hold the file paths of the audio resources.
 const AudioFiles = {
   jump: './resources/audio/jump.mp3', // The file path of the jump sound.
@@ -32,6 +44,8 @@ const AudioFiles = {
 
 // Set the source of the player image.
 Images.player.src = './resources/images/player/player.png'; // Update the image path
+Images.collectible.src= './resources/images/collectible/Candy.png'; 
+Images.harmfulCollectible.src= './resources/images/collectible/BadCandy.png'; 
 
 
 RunImages[0].src = "./resources/images/player/Run1.png";
@@ -47,7 +61,10 @@ IdleImages[4].src = "./resources/images/player/Idle5.png";
 IdleImages[5].src = "./resources/images/player/Idle6.png";
 IdleImages[6].src = "./resources/images/player/Idle7.png";
 
-
+HurtImages[0].src = "./resources/images/player/Hurt1.png";
+HurtImages[1].src = "./resources/images/player/Hurt2.png";
+HurtImages[2].src = "./resources/images/player/Hurt3.png";
+HurtImages[3].src = "./resources/images/player/Hurt4.png";
 
 // Export the Images and AudioFiles objects so they can be imported and used in other modules.
-export { Images, AudioFiles, RunImages, IdleImages};
+export { Images, AudioFiles, RunImages, IdleImages, HurtImages};

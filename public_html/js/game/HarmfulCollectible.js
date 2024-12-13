@@ -8,7 +8,7 @@ class HarmfullCollectible extends GameObject
     constructor(x, y)
     {
         super(x, y);
-        this.addComponent(new Renderer("red",30,30, Images.Harmfullcollectible));
+        this.addComponent(new Renderer("red",30,30, Images.harmfulCollectible));
         this.addComponent(new Physics({x:0, y:0},{x:0, y:0},{x:0, y:0}));
         
         this.tag = "hCandy";
