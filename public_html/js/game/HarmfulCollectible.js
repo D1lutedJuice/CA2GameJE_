@@ -3,15 +3,15 @@ import Renderer from "../engine/renderer.js";
 import Physics from "../engine/physics.js";
 import {Images} from "../engine/resources.js"
 
-class Collectible extends GameObject
+class HarmfullCollectible extends GameObject
 {
     constructor(x, y)
     {
         super(x, y);
-        this.addComponent(new Renderer("yellow",30,30, Images.collectible));
+        this.addComponent(new Renderer("red",30,30, Images.Harmfullcollectible));
         this.addComponent(new Physics({x:0, y:0},{x:0, y:0},{x:0, y:0}));
         
-        this.tag = "candy";
+        this.tag = "hCandy";
         
         this.floatTime = 1.0;
         this.timeFloating = this.floatTime;
@@ -41,5 +41,5 @@ class Collectible extends GameObject
   
 }
 
-export default Collectible
+export default HarmfullCollectible
 

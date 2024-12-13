@@ -8,6 +8,7 @@ import Input from "../engine/input.js"
 import {Images} from '../engine/resources.js'
 import Platform from './platform.js'
 import Collectible from './collectible.js'
+import HarmfulCollectible from './HarmfulCollectible.js'
 import ParticleSystem from '../engine/particleSystem.js'
 
 import {RunImages} from '../engine/resources.js'
@@ -104,7 +105,7 @@ class Player extends GameObject
         {
             if(physics.isColliding(coll.getComponent(Physics)))
             {
-                this.collectStar(coll);
+                this.collect(coll);
             }
         }
         if(this.y > this.game.canvas.height)
@@ -113,13 +114,37 @@ class Player extends GameObject
             this.y = this.startPoint.y;
         }
         
+         const harmfulCollectibles = this.game.gameObjects.filter
+        ((obj)=> obj instanceof HarmfulCollectible);
+        for(const hColl of harmfulCollectibles)
+        {
+            if(physics.isColliding(hColl.getComponent(Physics)))
+            {
+                this.collectHarmful(hColl);
+                
+            }
+        }
+        
+        
         
         super.update(deltaTime);
         
         
     }
     
-    collectStar(collectible)
+     collectHarmful(harmfulCollectible)
+    {
+        this.game.removeGameObject(harmfulCollectible);
+        this.lives--;
+        if(this.lives === 0 || this.lives <0)
+        {
+            this.lives=0;
+            
+        }
+       
+    }
+    
+    collect(collectible)
     {
         this.game.removeGameObject(collectible);
         this.emitParticles(collectible);
