@@ -10,6 +10,8 @@ class GameObject {
       this.y = y;
       // An array to hold all the components that are attached to this GameObject.
       this.components = [];
+
+
     }
   
     // The addComponent method is used to attach a new component to this GameObject.
@@ -51,6 +53,9 @@ class GameObject {
             this.components[index] = newComponent;
         }
     }
+  
+
+    
   }
   
   // The GameObject class is exported as the default export of this module.

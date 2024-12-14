@@ -10,6 +10,8 @@ import Platform from './platform.js'
 import Collectible from './collectible.js'
 import HarmfulCollectible from './HarmfulCollectible.js'
 import ParticleSystem from '../engine/particleSystem.js'
+import Button from './Button.js';
+
 
 import {RunImages} from '../engine/resources.js'
 import {IdleImages} from '../engine/resources.js'
@@ -47,6 +49,7 @@ class Player extends GameObject
         this.jumpTime = 1.0;
         this.jumpTimer = 0;
         this.lives = 3;
+        this.dead=false;
         this.startPoint = {x: x, y:y};
        
         
@@ -158,6 +161,8 @@ class Player extends GameObject
         if(this.lives === 0 || this.lives <0)
         {
             this.lives=0;
+            this.dead=true;
+            
         }
           this.hurt=true;
           this.hurtTime=0.3;//timer of hurt state 

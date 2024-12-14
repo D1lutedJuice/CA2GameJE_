@@ -23,6 +23,7 @@ class Game {
     window.addEventListener('resize', () => this.resizeCanvas());
     // Instantiate a new camera without a target and with dimensions equal to the canvas size.
     this.camera = new Camera(null, this.canvas.width, this.canvas.height);
+     this.pause = false;
   }
 
   // This method resizes the canvas to fill the window, with a small margin.
@@ -45,8 +46,12 @@ class Game {
     this.lastFrameTime = currentFrameTime;
 
     // Update all game objects and the camera.
-    this.update();
-    this.camera.update();
+   if(!this.pause)
+    {
+        this.update();
+        this.camera.update();
+     }
+
     // Draw the game objects on the canvas.
     this.draw();
 
@@ -105,14 +110,22 @@ class Game {
     this.isRunning = false;
 
     // Reset all game objects that have a reset method.
-    for (const gameObject of this.gameObjects) {
-      if (gameObject.reset) {
-        gameObject.reset();
-      }
-    }
-
+    //for (const gameObject of this.gameObjects) {
+    //  if (gameObject.reset) {
+     //   gameObject.reset();
+     // }
+    //}
+        
+    //used https://teamtreehouse.com/community/any-one-know-how-to-make-a-restart-button to find reload code
+    //the other code would glitch cause of my many objects
+     window.location.reload();
     // Restart the game.
     this.start();
+  }
+  
+     pauseGame()
+  {
+      this.pause = !this.pause;
   }
 }
 

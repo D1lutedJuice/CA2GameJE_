@@ -6,6 +6,7 @@ import Player from './player.js';
 import Collectible from './collectible.js';
 import HarmfulCollectible from './HarmfulCollectible.js';
 import PlayerUI from './PlayerUI.js';
+import Button from './Button.js';
 
 
 class Level extends Game
@@ -17,6 +18,8 @@ class Level extends Game
         this.spawnChance= 0.002;
         this.max= 0.01;
         this.increase= 0.000001;
+        this.paused = false;
+        
         
         const player = new Player(30, this.canvas.height - 50,100, 100);
         const playerUI = new PlayerUI(10, 10); 
@@ -27,20 +30,31 @@ class Level extends Game
         this.addGameObject(player);
         
         const platforms = [
-                    new Platform(-400, this.canvas.height -70, 1600, 200)
+                    new Platform(-500, this.canvas.height -70, 1600, 200)
                    
         ];
         
         for(const platform of platforms)
         {
             this.addGameObject(platform);
-        }        
+        }   
+        
+        this.addGameObject(new Button(this.canvas.width-110,10,100,40,"#131f26", "Pause")); 
+        this.player = player;
+        
     }
 
      //used this website to help with the random spawning collectable https://jsfiddle.net/m1erickson/RCLtR/
      update(deltaTime) {
+         
+         if (this.paused) {
+            //if the game is in a paused state don't update game objects
+            return;
+        }
+        
        //this ensures that the it updates the logic for everything
        super.update(deltaTime);
+       
        
         //spawning collectable at random
         if (Math.random() < 0.01) { // 1% chance per frame to spawn a collectible
@@ -58,6 +72,16 @@ class Level extends Game
         if (Math.random() < this.spawnChance) { // 1% chance per frame to spawn a collectible
             this.spawnRandomHarmfulCollectable();
         }
+        
+        
+        if(this.player.dead)
+        { 
+            this.paused = true; //freeze the game since the player lost prompt for restart
+             this.addGameObject(new Button(670,300, 150, 60,"#131f26", "Restart?")); 
+        }
+        
+       
+
     }
     
    spawnRandomCollectable() {
