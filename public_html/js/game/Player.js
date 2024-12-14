@@ -5,7 +5,7 @@ import Animator from '../engine/Animator.js'
 //import Renderer from '../engine/renderer.js'
 import Physics from '../engine/physics.js'
 import Input from "../engine/input.js"
-import {Images} from '../engine/resources.js'
+import {Images, AudioFiles} from '../engine/resources.js'
 import Platform from './platform.js'
 import Collectible from './collectible.js'
 import HarmfulCollectible from './HarmfulCollectible.js'
@@ -88,6 +88,7 @@ class Player extends GameObject
         if(input.isKeyDown("ArrowUp") && this.isOnPlatform)
         {
             this.startJump();
+            AudioFiles.jump.play();
         }
        
         if(this.isJumping)
@@ -101,7 +102,7 @@ class Player extends GameObject
           
             if(physics.isColliding(platform.getComponent(Physics)))
             {
-                if (!this.isJumping) 
+                if (!this.isJumping ) 
                 {
                     physics.acceleration.y = 0;
                     physics.velocity.y = 0;
@@ -119,6 +120,7 @@ class Player extends GameObject
         {
             if(physics.isColliding(coll.getComponent(Physics)))
             {
+                AudioFiles.collect.play();
                 this.collect(coll);
             }
         }
@@ -134,6 +136,7 @@ class Player extends GameObject
         {
             if(physics.isColliding(hColl.getComponent(Physics)))
             {
+                AudioFiles.hurt.play();
                 this.collectHarmful(hColl);
              
             }
@@ -158,11 +161,11 @@ class Player extends GameObject
     {
         this.game.removeGameObject(harmfulCollectible);
         this.lives--;
+        //once player runs out of lives
         if(this.lives === 0 || this.lives <0)
         {
-            this.lives=0;
-            this.dead=true;
-            
+            this.lives=0;//just so it doesnt go below 0 in the ui
+            this.dead=true;//set that the player died is true
         }
           this.hurt=true;
           this.hurtTime=0.3;//timer of hurt state 

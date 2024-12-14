@@ -30,7 +30,7 @@ class Level extends Game
         this.addGameObject(player);
         
         const platforms = [
-                    new Platform(-500, this.canvas.height -70, 1600, 200)
+                    new Platform(-500, this.canvas.height -70, 1600, 200)              
                    
         ];
         
@@ -91,8 +91,8 @@ class Level extends Game
      // set y to start at the top
      const y= 0;
    
-     // create the new collectable did -400 because collectables would for some reason not spawn on the left
-     const collectible = new Collectible(x-400, y);
+     // create the new collectable did -500 because collectables would for some reason not spawn on the left
+     const collectible = new Collectible(x-500, y);
     
     //adds collectable object to array of objects
      this.addGameObject(collectible);
@@ -105,8 +105,8 @@ class Level extends Game
      // set y to start at the top
      const y= 0;
    
-     // create the new collectable did -400 because collectables would for some reason not spawn on the left
-     const harmfulCollectible = new HarmfulCollectible(x-400, y);
+     // create the new collectable did -500 because collectables would for some reason not spawn on the left
+     const harmfulCollectible = new HarmfulCollectible(x-500, y);
     
     //adds collectable object to array of objects
      this.addGameObject(harmfulCollectible);

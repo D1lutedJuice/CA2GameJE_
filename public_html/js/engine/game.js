@@ -1,5 +1,7 @@
 // This class depends on the Camera, which is a separate module and needs to be imported.
 import Camera from './camera.js';
+import { AudioFiles} from '../engine/resources.js'
+
 
 // The Game class is responsible for setting up and managing the main game loop.
 class Game {
@@ -24,6 +26,9 @@ class Game {
     // Instantiate a new camera without a target and with dimensions equal to the canvas size.
     this.camera = new Camera(null, this.canvas.width, this.canvas.height);
      this.pause = false;
+     
+     this.sound= AudioFiles.background;
+     
   }
 
   // This method resizes the canvas to fill the window, with a small margin.
@@ -34,12 +39,17 @@ class Game {
 
   // This method starts the game loop.
   start() {
+      //used https://www.w3schools.com/tags/ref_av_dom.asp to help set loop audio and volume
+     this.sound.loop= true;
+     this.sound.volume= 0.5;
+     this.sound.play();
     this.isRunning = true;
     requestAnimationFrame((timestamp) => this.gameLoop(timestamp));
   }
 
   // The main game loop, which is called once per frame.
   gameLoop(currentFrameTime) {
+      
     // Calculate the time passed since the last frame.
     this.deltaTime = (currentFrameTime - this.lastFrameTime) / 1000;
     // Update the last frame time.
@@ -126,6 +136,12 @@ class Game {
      pauseGame()
   {
       this.pause = !this.pause;
+  }
+  
+  //background music
+  BackgroundMusic() {
+    this.backgroundMusic = AudioFiles.background;
+    this.backgroundMusic.loop = true;
   }
 }
 

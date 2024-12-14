@@ -37,10 +37,15 @@ const IdleImages=
         
 // Create an AudioFiles object to hold the file paths of the audio resources.
 const AudioFiles = {
-  jump: './resources/audio/jump.mp3', // The file path of the jump sound.
-  collect: './resources/audio/collect.mp3', // The file path of the collect sound.
-  // Add more audio file paths as needed
+  jump: new Audio('./resources/Audio/Jump.wav'), // The file path of the jump sound.
+  collect: new Audio('./resources/Audio/collectable.wav'), // The file path of the collect sound.
+  hurt: new Audio('./resources/Audio/Hurt.wav'),
+  click: new Audio('./resources/Audio/Click.wav'),
+  background: new Audio('./resources/Audio/Background.mp3')
+  
 };
+
+
 
 // Set the source of the player image.
 Images.player.src = './resources/images/player/player.png'; // Update the image path
