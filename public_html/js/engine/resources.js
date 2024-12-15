@@ -1,19 +1,22 @@
 // Create an Images object to hold the Image instances for the player and the enemy.
 const Images = {
-  player: new Image, // The Image instance for the player.
+    // The Image instances
+  player: new Image, 
   collectible: new Image(),
   harmfulCollectible: new Image
   
 };
 
+//run animation
 const RunImages = 
         [
-            new Image(), // The Image instance for the player.
             new Image(),
-            new Image(),// The Image instance for the enemy.
+            new Image(),
+            new Image(),
             new Image()
         ];
 
+//idle animation
 const IdleImages=
         [
            new Image(),
@@ -24,8 +27,9 @@ const IdleImages=
            new Image(),
            new Image()
         ];
-        
-        const HurtImages=
+    
+//hurt animation
+const HurtImages=
         [
            new Image(),
            new Image(),
@@ -37,8 +41,8 @@ const IdleImages=
         
 // Create an AudioFiles object to hold the file paths of the audio resources.
 const AudioFiles = {
-  jump: new Audio('./resources/Audio/Jump.wav'), // The file path of the jump sound.
-  collect: new Audio('./resources/Audio/collectable.wav'), // The file path of the collect sound.
+  jump: new Audio('./resources/Audio/Jump.wav'), 
+  collect: new Audio('./resources/Audio/collectable.wav'), 
   hurt: new Audio('./resources/Audio/Hurt.wav'),
   click: new Audio('./resources/Audio/Click.wav'),
   background: new Audio('./resources/Audio/Background.mp3')
@@ -47,12 +51,12 @@ const AudioFiles = {
 
 
 
-// Set the source of the player image.
-Images.player.src = './resources/images/player/player.png'; // Update the image path
+// Set the source of the image.
+Images.player.src = './resources/images/player/player.png'; 
 Images.collectible.src= './resources/images/collectible/Candy.png'; 
 Images.harmfulCollectible.src= './resources/images/collectible/BadCandy.png'; 
 
-
+//add animation images to array in the correct order
 RunImages[0].src = "./resources/images/player/Run1.png";
 RunImages[1].src = "./resources/images/player/Run2.png";
 RunImages[2].src = "./resources/images/player/Run3.png";

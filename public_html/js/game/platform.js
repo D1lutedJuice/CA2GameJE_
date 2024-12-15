@@ -2,6 +2,7 @@ import GameObject from '../engine/gameobject.js'
 import Renderer from '../engine/renderer.js'
 import Physics from '../engine/physics.js'
 
+//used code from class to help
 class Platform extends GameObject
 {
     constructor(x, y, w, h, color="#131f26")

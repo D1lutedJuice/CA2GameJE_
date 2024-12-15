@@ -17,24 +17,30 @@ import {RunImages} from '../engine/resources.js'
 import {IdleImages} from '../engine/resources.js'
 import {HurtImages} from '../engine/resources.js'
 
+//used class example for help
 class Player extends GameObject
 {
     constructor(x, y, w, h)
     {
         super(x, y);
-       // this.addComponent(new Renderer('red', w, h, Images.player));
+        //add components 
         this.addComponent(new Physics({x:0, y:0}, {x:0, y:0}) );
         this.addComponent(new Input());
+        //initialise animatior
         this.animator = new Animator('red',w,h);
         this.addComponent(this.animator);
+        
         let run = new Animation('red',w,h, RunImages, 10);
         let idle = new Animation('red', w, h, IdleImages, 10);
         let hurt = new Animation('red', w, h, HurtImages, 10);
         
+        //add animations to animator set default animation to idle
         this.animator.addAnimation("run", run);
         this.animator.addAnimation("idle", idle);
         this.animator.addAnimation("hurt", hurt);
         this.animator.setAnimation("idle");
+        
+        //variables
         this.hurt= false;
         this.hurtTime= 0.0;
         this.tag = "player";
@@ -67,7 +73,7 @@ class Player extends GameObject
     
         if(input.isKeyDown("ArrowRight"))
         {
-            
+            //move right and play run animation
             physics.velocity.x = this.speed;
             this.direction = 1;
             console.log("in");
@@ -75,33 +81,40 @@ class Player extends GameObject
         }
         else if(input.isKeyDown("ArrowLeft"))
         {
+            //move left and play animation
             physics.velocity.x = -this.speed;
             this.direction = -1;
             this.animator.setAnimation("run");
         }
         else
         {
+            //no movement so play idle
             physics.velocity.x = 0;
             this.animator.setAnimation("idle");
         }
         
         if(input.isKeyDown("ArrowUp") && this.isOnPlatform)
         {
+            //jump & jump sound
             this.startJump();
             AudioFiles.jump.play();
         }
        
+       //if player is jumping update jump timer
         if(this.isJumping)
         {
             this.updateJump(deltaTime);
         }
     }
+    
+        //collision with platforms (mainly same as class example)
         const platforms = this.game.gameObjects.filter((obj) => obj instanceof Platform);
         for(const platform of platforms)
         {
           
             if(physics.isColliding(platform.getComponent(Physics)))
             {
+                //if player is not jumping set the player to be on top of platform
                 if (!this.isJumping ) 
                 {
                     physics.acceleration.y = 0;
@@ -113,29 +126,35 @@ class Player extends GameObject
             
         }
     
-        
+        //collision with collectables
         const collectibles = this.game.gameObjects.filter
         ((obj)=> obj instanceof Collectible);
         for(const coll of collectibles)
         {
             if(physics.isColliding(coll.getComponent(Physics)))
             {
+                //on collision play collect sound anf collect item
                 AudioFiles.collect.play();
                 this.collect(coll);
             }
         }
+        
+        //resets player position if they fall off the screen
+        //kept this because i had no time to add walls unfortunatley
         if(this.y > this.game.canvas.height)
         {
             this.x = this.startPoint.x;
             this.y = this.startPoint.y;
         }
         
+        // Collision detection with harmful collectibles
          const harmfulCollectibles = this.game.gameObjects.filter
         ((obj)=> obj instanceof HarmfulCollectible);
         for(const hColl of harmfulCollectibles)
         {
             if(physics.isColliding(hColl.getComponent(Physics)))
             {
+                //on collision play hurt sound and call collect harmful object
                 AudioFiles.hurt.play();
                 this.collectHarmful(hColl);
              
@@ -149,7 +168,6 @@ class Player extends GameObject
            if (this.hurtTime <= 0) {
                //after timer player no longer hurt 
                this.hurt = false; 
-               //this.animator.setAnimation("idle");
              }
 }
         super.update(deltaTime);
@@ -157,29 +175,33 @@ class Player extends GameObject
         
     }
     
+    //collect harmful object (losing a life)
      collectHarmful(harmfulCollectible)
     {
+        //removes the object
         this.game.removeGameObject(harmfulCollectible);
-        this.lives--;
+        this.lives--;//decrease the life
         //once player runs out of lives
         if(this.lives === 0 || this.lives <0)
         {
-            this.lives=0;//just so it doesnt go below 0 in the ui
+            this.lives=0;//just so it doesnt go below 0 in the UI
             this.dead=true;//set that the player died is true
         }
-          this.hurt=true;
+          this.hurt=true;//player is hurt
           this.hurtTime=0.3;//timer of hurt state 
-          this.animator.setAnimation("hurt");           
+          this.animator.setAnimation("hurt"); //play animation timer will allow this         
     }
     
+    //collecting candy collectables
     collect(collectible)
     {
-        this.game.removeGameObject(collectible);
-        this.emitParticles(collectible);
-        this.score++;
+        this.game.removeGameObject(collectible);//remove object
+        this.emitParticles(collectible);//emit the particles
+        this.score++;//increases "score" (num of candies collected)
        
     }
     
+    //used class example
     emitParticles(collectible)
     {
         let renderer = collectible.getComponent(Renderer);
@@ -190,8 +212,10 @@ class Player extends GameObject
 
     }
     
+    
     startJump()
     {
+        //set velocity wont allow for another jump until landed
         if(this.isOnPlatform)
         {
             this.isJumping = true;
@@ -201,8 +225,10 @@ class Player extends GameObject
         }
     }
     
+   
     updateJump(deltaTime)
     {
+        //stop jumping when the timer ends or velocity goes positive
         this.jumpTimer -= deltaTime;
         if(this.jumpTimer <=0 || this.getComponent(Physics).velocity.y > 0)
         {

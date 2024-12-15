@@ -60,6 +60,13 @@ click(event)
             //call the reset method from game
             this.game.reset();   
         }
+        if(this.text === "you WIN! Restart?")
+        {
+            //play the audio
+            AudioFiles.click.play();
+            //call the reset method from game
+            this.game.reset();   
+        }
       }    
   }
  
